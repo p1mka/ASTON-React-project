@@ -1,0 +1,28 @@
+import styled from "styled-components";
+
+const HeaderContainer = ({ className }) => {
+    return (
+        <header className={className}>
+            <h1>logo</h1>
+            <h3>12345</h3>
+            <div className="searchBar">
+                <h3>поиск</h3>
+                <input type="search"></input>
+            </div>
+        </header>
+    );
+};
+
+export const Header = styled(HeaderContainer)`
+    display: flex;
+    color: #000;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 1rem 10%;
+    box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.25);
+
+    & .searchBar {
+        display: flex;
+    }
+`;

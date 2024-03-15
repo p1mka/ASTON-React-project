@@ -1,11 +1,29 @@
+import "./App.css";
+import { CustomRouter } from "./routes/CustomRouter";
+import { Header } from "./components";
+import styled from "styled-components";
 
-import './App.css'
+const AppColumn = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+`;
+
+const MainContainer = styled.div`
+    margin: 0 5rem;
+`;
 
 function App() {
-
-  return (
-      <h1>Hello React!</h1>
-  )
+    return (
+        <AppColumn>
+            <Header />
+            <MainContainer>
+                <CustomRouter />
+            </MainContainer>
+        </AppColumn>
+    );
 }
 
-export default App
+export default App;
