@@ -1,5 +1,3 @@
-import { mapFilms } from "../../../../features";
-import { useGetFilmsQuery } from "../../../../redux";
 import { FilmCard } from "./components";
 import styled from "styled-components";
 
@@ -18,5 +16,4 @@ export const FilmCards = styled(FilmCardsContainer)`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 1.5em 0 1.5em;
 `;

@@ -14,3 +14,17 @@
 * {
     margin: 0;
 }
+
+a {
+    text-decoration: none;
+    transform: scale(110%);
+    transition: 1s;
+}
+
+a:hover {
+    transform: (110%);
+}
+
+a:visited {
+    color: #000;
+}
