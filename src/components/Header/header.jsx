@@ -1,13 +1,21 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const HeaderContainer = ({ className }) => {
     return (
         <header className={className}>
-            <h1>logo</h1>
-            <h3>12345</h3>
+            <Link to="/">
+                <h1>logo</h1>
+            </Link>
             <div className="searchBar">
-                <h3>поиск</h3>
+                <h3>&#128269;</h3>
                 <input type="search"></input>
+            </div>
+            <div className="userBar">
+                <p>Вход</p>
+                <Link to="/authorize">
+                    <p>&#9094;</p>
+                </Link>
             </div>
         </header>
     );
@@ -24,5 +32,12 @@ export const Header = styled(HeaderContainer)`
 
     & .searchBar {
         display: flex;
+    }
+
+    & .userBar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
     }
 `;

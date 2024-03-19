@@ -1,3 +1,4 @@
+import { Loader } from "../../components";
 import { mapFilms } from "../../features";
 import { useGetFilmsQuery } from "../../redux";
 import { FilmCards } from "./components";
@@ -6,7 +7,7 @@ export const Main = () => {
     const { data = [], isError, isLoading } = useGetFilmsQuery();
 
     if (isLoading) {
-        return <h1>Loading...</h1>;
+        return <Loader />;
     }
 
     if (isError) {

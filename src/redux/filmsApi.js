@@ -13,7 +13,10 @@ export const filmsApi = createApi({
         getFilms: build.query({
             query: () => ``,
         }),
+        getFilmById: build.query({
+            query: (id) => id,
+        }),
     }),
 });
 
-export const { useGetFilmsQuery } = filmsApi;
+export const { useGetFilmsQuery, useGetFilmByIdQuery } = filmsApi;

@@ -12,7 +12,7 @@ const AppColumn = styled.div`
 `;
 
 const MainContainer = styled.div`
-    margin: 0 5rem;
+    margin: 1.5rem 5rem;
 `;
 
 function App() {
