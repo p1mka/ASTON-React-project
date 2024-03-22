@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { UserBar } from "./components";
 import styled from "styled-components";
 
 const HeaderContainer = ({ className }) => {
@@ -11,12 +13,7 @@ const HeaderContainer = ({ className }) => {
                 <h3>&#128269;</h3>
                 <input type="search"></input>
             </div>
-            <div className="userBar">
-                <p>Вход</p>
-                <Link to="/authorize">
-                    <p>&#9094;</p>
-                </Link>
-            </div>
+            <UserBar />
         </header>
     );
 };
@@ -32,12 +29,5 @@ export const Header = styled(HeaderContainer)`
 
     & .searchBar {
         display: flex;
-    }
-
-    & .userBar {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
     }
 `;
