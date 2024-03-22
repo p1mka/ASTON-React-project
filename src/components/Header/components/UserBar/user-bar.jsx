@@ -1,14 +1,15 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../../../../redux/selectors";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { signOut } from "firebase/auth";
 import { auth } from "../../../../db/db";
+import { Link } from "react-router-dom";
 import { removeUser } from "../../../../redux/slices/user-slice";
+import { selectUser } from "../../../../redux/selectors";
+import { signOut } from "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
 
 const UserBarContainer = ({ className }) => {
-    const user = useSelector(selectUser);
     const dispatch = useDispatch();
+
+    const user = useSelector(selectUser);
 
     const handleSignOut = () => {
         signOut(auth).then(() => dispatch(removeUser()));
