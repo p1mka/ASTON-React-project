@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import { useGetFilmByIdQuery } from "../../redux";
 import styled from "styled-components";
 
-const FilmContainer = ({ className }) => {
+const FilmPageContainer = ({ className }) => {
     const { id } = useParams();
 
-    const { data, isLoading, isError } = useGetFilmByIdQuery(id);
+    const { data: film, isLoading, isError } = useGetFilmByIdQuery(id);
 
     if (isLoading) {
         return <Loader />;
@@ -17,8 +17,7 @@ const FilmContainer = ({ className }) => {
         return <h1>Ошибка загрузки данных</h1>;
     }
 
-    const { countries, title, description, imgUrl } = mapFilm(data);
-    console.log(data);
+    const { countries, title, description, imgUrl } = film;
 
     return (
         <div className={className}>
@@ -36,7 +35,7 @@ const FilmContainer = ({ className }) => {
     );
 };
 
-export const Film = styled(FilmContainer)`
+export const FilmPage = styled(FilmPageContainer)`
     width: 100%;
     border: 1px solid black;
     border-radius: 1.5rem;

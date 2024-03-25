@@ -3,8 +3,8 @@ import { mapFilms } from "../../features";
 import { useGetFilmsQuery } from "../../redux";
 import { FilmCards } from "./components";
 
-export const Main = () => {
-    const { data = [], isError, isLoading } = useGetFilmsQuery();
+export const MainPage = () => {
+    const { data: films, isError, isLoading } = useGetFilmsQuery();
 
     if (isLoading) {
         return <Loader />;
@@ -13,8 +13,6 @@ export const Main = () => {
     if (isError) {
         return <h1>Ошибка загрузки данных</h1>;
     }
-
-    const films = mapFilms(data.items);
 
     return <FilmCards films={films} />;
 };

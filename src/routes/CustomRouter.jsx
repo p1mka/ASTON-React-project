@@ -1,21 +1,23 @@
 import { Routes, Route } from "react-router-dom";
-import { Film, Main } from "../pages";
+import { AuthorizePage, FilmPage, MainPage, RegisterPage } from "../pages";
 
 export const PATHS = {
     MAIN: "/",
     AUTHORIZE: "/authorize",
     REGISTRATION: "/registration",
     FILM_CARD: `/:id`,
+    ERROR: "*",
 };
 
 export const CustomRouter = () => {
     return (
         <>
             <Routes>
-                <Route path={PATHS.MAIN} element={<Main />} />
-                <Route path={PATHS.AUTHORIZE} element={"Авторизация"} />
-                <Route path={PATHS.REGISTRATION} element={"Регистрация"} />
-                <Route path={PATHS.FILM_CARD} element={<Film />} />
+                <Route path={PATHS.MAIN} element={<MainPage />} />
+                <Route path={PATHS.AUTHORIZE} element={<AuthorizePage />} />
+                <Route path={PATHS.REGISTRATION} element={<RegisterPage />} />
+                <Route path={PATHS.FILM_CARD} element={<FilmPage />} />
+                <Route path={PATHS.ERROR} element={<h1>404 not found</h1>} />
             </Routes>
         </>
     );
