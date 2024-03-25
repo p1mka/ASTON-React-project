@@ -13,3 +13,5 @@ export const isAuth = createSlice({
         },
     },
 });
+
+export const { toggleAuth } = isAuth.actions;
