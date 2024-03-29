@@ -1,2 +1,2 @@
-export * from "./select-user-id";
+export * from "./select-user";
 export * from "./select-favorites";

@@ -3,7 +3,7 @@ import { FilmCards } from "../main/components";
 import { Loader } from "../../components";
 import { useFavorites } from "../../hooks/";
 
-export const FavoritesPage = () => {
+const FavoritesPage = () => {
     const { favoritesIds } = useFavorites();
     const {
         data: films,
@@ -29,3 +29,5 @@ export const FavoritesPage = () => {
         </div>
     );
 };
+
+export default FavoritesPage;

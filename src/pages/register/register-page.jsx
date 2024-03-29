@@ -14,8 +14,10 @@ const RegisterPageContainer = ({ className }) => {
     );
 };
 
-export const RegisterPage = styled(RegisterPageContainer)`
+const RegisterPage = styled(RegisterPageContainer)`
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
+
+export default RegisterPage;

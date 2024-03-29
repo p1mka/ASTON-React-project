@@ -35,7 +35,7 @@ const FilmPageContainer = ({ className }) => {
     );
 };
 
-export const FilmPage = styled(FilmPageContainer)`
+const FilmPage = styled(FilmPageContainer)`
     width: 100%;
     border: 1px solid black;
     border-radius: 1.5rem;
@@ -53,3 +53,5 @@ export const FilmPage = styled(FilmPageContainer)`
         align-items: center;
     }
 `;
+
+export default FilmPage;
