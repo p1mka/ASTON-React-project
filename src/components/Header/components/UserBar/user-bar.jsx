@@ -1,33 +1,73 @@
-import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../../../../redux/selectors";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { signOut } from "firebase/auth";
 import { auth } from "../../../../db/db";
+import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../../../redux/slices/user-slice";
+import { selectUserId } from "../../../../redux/selectors";
+import { signOut } from "firebase/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { Icon } from "../../../Icon/icon";
+import { clearFavorites } from "../../../../redux";
+import { useFavorites } from "../../../../hooks";
+import styled from "styled-components";
 
 const UserBarContainer = ({ className }) => {
-    const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
+    const navigate = useNavigate();
+
+    const userId = useSelector(selectUserId);
+    const { favoritesCount } = useFavorites();
+
+    const onLoginIconClick = () => navigate("/authorize");
+
     const handleSignOut = () => {
-        signOut(auth).then(() => dispatch(removeUser()));
+        signOut(auth).then(() => {
+            dispatch(clearFavorites());
+            dispatch(removeUser());
+        });
     };
+
+    const onFavoritesIconClick = () => navigate("/favorites");
 
     return (
         <div className={className}>
-            {user.token ? (
+            {userId ? (
                 <div className="nav-buttons">
-                    <button>Избранное</button>
-                    <button>История</button>
-                    <button onClick={handleSignOut}>Выход</button>
+                    <div className="elements-column">
+                        <Icon
+                            fill={true}
+                            id={"fa-heart"}
+                            onClick={onFavoritesIconClick}
+                            size={"30px"}
+                        />
+                        {favoritesCount !== 0 && (
+                            <div
+                                className="circle"
+                                onClick={onFavoritesIconClick}
+                            >
+                                {favoritesCount}
+                            </div>
+                        )}
+                    </div>
+                    <Icon
+                        id={"fa-hourglass-half"}
+                        onClick={onFavoritesIconClick}
+                        size={"30px"}
+                    />
+                    <Icon
+                        fill={true}
+                        id={"fa-right-from-bracket"}
+                        size={"30px"}
+                        onClick={handleSignOut}
+                    />
                 </div>
             ) : (
                 <div className="login">
-                    <p>Вход</p>
-                    <Link to="/authorize">
-                        <p>&#9094;</p>
-                    </Link>
+                    <Icon
+                        fill={true}
+                        id={"fa-right-to-bracket"}
+                        size={"30px"}
+                        onClick={onLoginIconClick}
+                    />
                 </div>
             )}
         </div>
@@ -45,9 +85,35 @@ export const UserBar = styled(UserBarContainer)`
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        gap: 0.5rem;
+        gap: 2rem;
     }
+    & .elements-column {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     & .login {
         display: flex;
+        gap: 0.5rem;
+        font-size: 20px;
+    }
+
+    & .circle {
+        position: absolute;
+        left: 1.3rem;
+        bottom: 1.7rem;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        color: #fff;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: #2b7c3d;
+        font-size: 12px;
+        cursor: pointer;
     }
 `;

@@ -11,11 +11,49 @@ module.exports = {
     ignorePatterns: ["dist", ".eslintrc.cjs"],
     parserOptions: { ecmaVersion: "latest", sourceType: "module" },
     settings: { react: { version: "18.2" } },
-    plugins: ["react-refresh"],
+    plugins: ["react-refresh", "prettier"],
     rules: {
+        "prettier/prettier": "error",
         "no-console": "warn",
         "import/prefer-default-export": "off",
         "no-unused-expressions": "error",
+        "import/order": [
+        1, 
+            { "groups": 
+                [
+                "external", 
+                "builtin", 
+                "internal", 
+                "sibling", 
+                "parent", 
+                "index"
+                ], 
+            } 
+        ] ,"pathGroups": [
+            { 
+              "pattern": "components", 
+              "group": "internal" 
+            }, 
+            { 
+              "pattern": "common", 
+              "group": "internal" 
+            }, 
+            { 
+              "pattern": "routes/ **", 
+              "group": "internal" 
+            }, 
+            { 
+              "pattern": "assets/**", 
+              "group": "internal", 
+              "position": "after" 
+            }
+         ], 
+        "pathGroupsExcludedImportTypes": 
+           ["internal"], 
+           "alphabetize": { 
+              "order": "asc", 
+              "caseInsensitive": true 
+           },
         "sort-imports": [
             "error",
             {

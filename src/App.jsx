@@ -1,12 +1,13 @@
 import "./App.css";
+import { auth } from "./db/db";
 import { CustomRouter } from "./routes/CustomRouter";
 import { Header } from "./components";
-import styled from "styled-components";
-import { auth } from "./db/db";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setUser } from "./redux/slices/user-slice";
+import { getFavorites } from "./redux/thunks/favorite";
+import styled from "styled-components";
 
 const AppColumn = styled.div`
     position: relative;
@@ -24,7 +25,7 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 dispatch(
                     setUser({
@@ -33,6 +34,7 @@ function App() {
                         id: user.uid,
                     })
                 );
+                dispatch(getFavorites({ userId: user.uid }));
             }
         });
     }, []);

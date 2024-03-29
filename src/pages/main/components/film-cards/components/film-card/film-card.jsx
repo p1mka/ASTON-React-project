@@ -1,16 +1,30 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { FavoritesButton } from "../../../../../../components";
+import { useFavorites } from "../../../../../../hooks";
+import { selectUserId } from "../../../../../../redux/selectors";
 import styled from "styled-components";
 
 const FilmCardContainer = ({ film, className }) => {
+    const userId = useSelector(selectUserId);
+
     const { id, title, previewImgUrl, rating, year, genres } = film;
+
+    const { isLoading, getIsFavorite, toggleFavorites } = useFavorites();
+
+    const isFavorite = getIsFavorite(id);
+
+    const onFavoriteButtonClick = () => {
+        toggleFavorites(id);
+    };
 
     const navigate = useNavigate();
 
     const onFilmCardClick = () => navigate(`/${id}`);
 
     return (
-        <div className={className} onClick={onFilmCardClick}>
-            <div className="imgAndTitle">
+        <div className={className}>
+            <div className="imgAndTitle" onClick={onFilmCardClick}>
                 <img src={previewImgUrl} alt={"Картинка в пути..."}></img>
                 <h3>{title}</h3>
             </div>
@@ -20,6 +34,15 @@ const FilmCardContainer = ({ film, className }) => {
             <p>
                 Год выхода: <b>{year}</b>
             </p>
+
+            {userId && (
+                <FavoritesButton
+                    movieId={id}
+                    isFavorite={isFavorite}
+                    onFavoriteButtonClick={onFavoriteButtonClick}
+                    isLoading={isLoading}
+                />
+            )}
         </div>
     );
 };
@@ -30,7 +53,8 @@ export const FilmCard = styled(FilmCardContainer)`
     width: 250px;
     border-radius: 0.5em;
     margin-bottom: 1.5em;
-    height: 450px;
+    min-height: 450px;
+    height: 500px;
 
     & .imgAndTitle {
         display: flex;
