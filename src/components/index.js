@@ -5,3 +5,4 @@ export * from "./Registration/registration";
 export * from "./Login/login";
 export * from "./FavoritesButton/favorites-button";
 export * from "./Icon/icon";
+export * from "./Input/input";
