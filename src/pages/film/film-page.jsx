@@ -1,5 +1,4 @@
-import { Loader } from "../../components";
-import { mapFilm } from "../../features";
+import { FavoritesButton, Loader } from "../../components";
 import { useParams } from "react-router-dom";
 import { useGetFilmByIdQuery } from "../../redux";
 import styled from "styled-components";
@@ -31,6 +30,7 @@ const FilmPageContainer = ({ className }) => {
                 <p>{countries[0]?.country}</p>
                 <p>{description}</p>
             </div>
+            <FavoritesButton movieId={id} />
         </div>
     );
 };

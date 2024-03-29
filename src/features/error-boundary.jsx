@@ -11,12 +11,12 @@ export class ErrorBoundary extends React.Component {
     }
 
     componentDidCatch(error, info) {
-        logErrorToMyService(error, info);
+        console.log(error, info);
     }
 
     render() {
         if (this.state.hasError) {
-            return <h1>Что-то пошло не так.</h1>;
+            return <h1>Что-то пошло не так...</h1>;
         }
 
         return this.props.children;

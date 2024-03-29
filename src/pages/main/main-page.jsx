@@ -1,5 +1,4 @@
 import { Loader } from "../../components";
-import { mapFilms } from "../../features";
 import { useGetFilmsQuery } from "../../redux";
 import { FilmCards } from "./components";
 

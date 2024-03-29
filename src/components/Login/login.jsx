@@ -20,9 +20,10 @@ export const Login = () => {
                         id: user.uid,
                     })
                 );
+
                 navigate("/");
             })
-            .catch((e) => (serverError = e));
+            .catch((e) => (serverError = e)); //TODO
     };
 
     return (

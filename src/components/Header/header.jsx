@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { UserBar } from "./components";
+import { Icon } from "../Icon/icon";
 import styled from "styled-components";
 
 const HeaderContainer = ({ className }) => {
@@ -9,10 +9,10 @@ const HeaderContainer = ({ className }) => {
             <Link to="/">
                 <h1>logo</h1>
             </Link>
-            <div className="searchBar">
-                <h3>&#128269;</h3>
-                <input type="search"></input>
-            </div>
+            <Icon fill={true} id={"fa-magnifying-glass"}>
+                <input></input>
+            </Icon>
+
             <UserBar />
         </header>
     );
@@ -21,6 +21,7 @@ const HeaderContainer = ({ className }) => {
 export const Header = styled(HeaderContainer)`
     display: flex;
     color: #000;
+
     align-items: center;
     justify-content: space-between;
     background: #fff;

@@ -1,8 +1,30 @@
-# React + Vite
+# Movies-library
+- API: [KinopoiskAPI](https://kinopoiskapiunofficial.tech)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Основной функционал
 
-Currently, two official plugins are available:
+- Загрузка 20 избранных фильмов по версии API.
+- Регистрация и авторизация пользователей.
+- Избранные карточки: пользователь может сохранять или удалять фильмы из избранных.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+### 1 уровень 
+- React
+
+- [x] Пишу функциональные компоненты c хуками в приоритете над классовыми. 
+- [x] Есть разделение на умные и глупые компоненты 
+- [x] Есть рендеринг списков
+- [x] Реализована хотя бы одна форма
+- [x] Есть применение предохранителя
+- [x] Есть хотя бы один кастомный хук
+
+- Redux
+
+- [x] Использую Modern Redux with Redux Toolkit 
+- [x] Использую слайсы
+- [x] Использую RTK Query
+- [x] Использую Transforming Responses
+
+### 2 уровень 
+
+- [x] Использую Firebase

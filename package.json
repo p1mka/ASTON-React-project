@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@reduxjs/toolkit": "^2.2.1",
     "dotenv": "^16.4.5",
+    "eslint-plugin-import": "^2.29.1",
     "firebase": "^10.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
