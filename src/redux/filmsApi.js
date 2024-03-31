@@ -12,11 +12,11 @@ export const filmsApi = createApi({
     }),
     endpoints: (build) => ({
         getFilms: build.query({
-            query: () => ``,
+            query: () => `/v2.2/films`,
             transformResponse: (res) => mapFilms(res.items),
         }),
         getFilmById: build.query({
-            query: (id) => id,
+            query: (id) => `v2.2/films/${id}`,
             transformResponse: (res) => mapFilm(res),
         }),
         getFilmsByIds: build.query({
@@ -24,7 +24,7 @@ export const filmsApi = createApi({
                 try {
                     const requests = ids.map(async (id) => {
                         const res = await fetch(
-                            `${process.env.VITE_KINOPOISK_BASE_URL}/${id}`,
+                            `${process.env.VITE_KINOPOISK_BASE_URL}/v2.2/films/${id}`,
                             {
                                 method: "GET",
                                 headers: {
@@ -43,8 +43,17 @@ export const filmsApi = createApi({
                 }
             },
         }),
+        getSearchedFilms: build.query({
+            query: (searchPhrase) =>
+                `/v2.1/films/search-by-keyword?keyword=${searchPhrase}&page=1`,
+            transformResponse: (res) => mapFilms(res.films),
+        }),
     }),
 });
 
-export const { useGetFilmsQuery, useGetFilmByIdQuery, useGetFilmsByIdsQuery } =
-    filmsApi;
+export const {
+    useGetFilmsQuery,
+    useGetFilmByIdQuery,
+    useGetFilmsByIdsQuery,
+    useGetSearchedFilmsQuery,
+} = filmsApi;
