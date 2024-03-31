@@ -33,6 +33,7 @@ const SearchBarContainer = ({ className }) => {
                     show={showResults}
                     onOutsideClick={onOutsideClick}
                     searchPhrase={searchPhrase}
+                    setShowResults={setShowResults}
                 />
             )}
         </div>

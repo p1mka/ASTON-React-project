@@ -14,6 +14,8 @@ const FilmCardContainer = ({ film, className }) => {
 
     const isFavorite = getIsFavorite(id);
 
+    console.log(isFavorite);
+
     const onFavoriteButtonClick = () => {
         toggleFavorites(id);
     };

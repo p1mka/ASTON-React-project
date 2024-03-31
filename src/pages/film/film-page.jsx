@@ -1,12 +1,21 @@
 import { FavoritesButton, Loader } from "../../components";
 import { useParams } from "react-router-dom";
 import { useGetFilmByIdQuery } from "../../redux";
+import { useFavorites } from "../../hooks";
 import styled from "styled-components";
 
 const FilmPageContainer = ({ className }) => {
     const { id } = useParams();
 
     const { data: film, isLoading, isError } = useGetFilmByIdQuery(id);
+
+    const { getIsFavorite, toggleFavorites } = useFavorites();
+
+    const isFavorite = getIsFavorite(Number(id));
+
+    const onFavoriteButtonClick = () => {
+        toggleFavorites(Number(id));
+    };
 
     if (isLoading) {
         return <Loader />;
@@ -30,7 +39,11 @@ const FilmPageContainer = ({ className }) => {
                 <p>{countries[0]?.country}</p>
                 <p>{description}</p>
             </div>
-            <FavoritesButton movieId={id} />
+            <FavoritesButton
+                movieId={id}
+                isFavorite={isFavorite}
+                onFavoriteButtonClick={onFavoriteButtonClick}
+            />
         </div>
     );
 };

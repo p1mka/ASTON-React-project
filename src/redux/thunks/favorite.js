@@ -16,7 +16,7 @@ export const getFavorites = createAsyncThunk(
 export const addFavorite = createAsyncThunk(
     "favorites/addFavorite",
     async ({ userId, movieId }) => {
-        await addToFavorites(userId, movieId);
+        await addToFavorites(userId, Number(movieId));
         return movieId;
     }
 );

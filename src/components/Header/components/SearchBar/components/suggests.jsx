@@ -25,9 +25,17 @@ const fadeOut = keyframes`
   }
 `;
 
-const SuggestsContainer = ({ className, onOutsideClick, searchPhrase }) => {
+const SuggestsContainer = ({
+    className,
+    onOutsideClick,
+    searchPhrase,
+    setShowResults,
+}) => {
     const navigate = useNavigate();
-    const onSuggestClick = (id) => navigate(`/${id}`);
+    const onSuggestClick = (id) => {
+        setShowResults(false);
+        navigate(`/${id}`);
+    };
 
     const debounceSearch = useDebounce(searchPhrase, 1000);
     const { data: suggests } = useGetSearchedFilmsQuery(debounceSearch, {
