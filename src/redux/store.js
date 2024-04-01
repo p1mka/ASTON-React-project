@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { filmsApi } from "./filmsApi";
-import { favoritesSlice, userSlice } from "./slices";
+import { appSlice, favoritesSlice, historySlice, userSlice } from "./slices";
 
 const rootReducer = combineReducers({
+    app: appSlice.reducer,
     user: userSlice.reducer,
     favorites: favoritesSlice.reducer,
+    history: historySlice.reducer,
     [filmsApi.reducerPath]: filmsApi.reducer,
 });
 

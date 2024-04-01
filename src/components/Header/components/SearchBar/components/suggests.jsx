@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { useDebounce } from "../../../../../hooks";
 import { useGetSearchedFilmsQuery } from "../../../../../redux";
@@ -31,10 +31,8 @@ const SuggestsContainer = ({
     searchPhrase,
     setShowResults,
 }) => {
-    const navigate = useNavigate();
     const onSuggestClick = (id) => {
         setShowResults(false);
-        navigate(`/${id}`);
     };
 
     const debounceSearch = useDebounce(searchPhrase, 1000);
@@ -48,18 +46,22 @@ const SuggestsContainer = ({
                 <p>Загрузка данных...</p>
             ) : (
                 <>
-                    {suggests && !suggests.length && !!!debounceSearch && (
+                    {!suggests.length && (
                         <h3>Фильмов по Вашему запросу не найдено...</h3>
                     )}
                     {suggests.map(({ id, imgUrl, title }) => (
-                        <div
-                            className="finded-suggest"
-                            key={id}
-                            onClick={() => onSuggestClick(id)}
-                        >
-                            <img src={imgUrl} alt="Изображение недоступно..." />
-                            {title}
-                        </div>
+                        <Link key={id} to={`/${id}`}>
+                            <div
+                                className="finded-suggest"
+                                onClick={() => onSuggestClick(id)}
+                            >
+                                <img
+                                    src={imgUrl}
+                                    alt="Изображение недоступно..."
+                                />
+                                {title}
+                            </div>
+                        </Link>
                     ))}
                 </>
             )}
@@ -104,5 +106,9 @@ export const Suggests = styled(SuggestsContainer)`
     & .finded-suggest:hover {
         transform: scale(110%);
         transition: transform 0.3s;
+    }
+
+    & a {
+        color: #000;
     }
 `;

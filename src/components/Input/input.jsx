@@ -2,11 +2,12 @@ import { forwardRef } from "react";
 import styled from "styled-components";
 
 const InputContainer = forwardRef(
-    ({ className, type, children, title, ...props }, ref) => (
+    ({ className, type, children, title, onChange, ...props }, ref) => (
         <input
             className={className}
-            type={type ? type : "default"}
+            type={type ? type : "text"}
             title={title}
+            onChange={onChange}
             {...props}
             ref={ref}
         >

@@ -14,8 +14,6 @@ const FilmCardContainer = ({ film, className }) => {
 
     const isFavorite = getIsFavorite(id);
 
-    console.log(isFavorite);
-
     const onFavoriteButtonClick = () => {
         toggleFavorites(id);
     };
@@ -63,6 +61,7 @@ export const FilmCard = styled(FilmCardContainer)`
     & .imgAndTitle {
         display: flex;
         flex-direction: column;
+        cursor: pointer;
     }
     & .imgAndTitle > h3 {
         height: 30px;

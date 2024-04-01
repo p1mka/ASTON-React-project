@@ -27,6 +27,7 @@ const UserBarContainer = ({ className }) => {
     };
 
     const onFavoritesIconClick = () => navigate("/favorites");
+    const onHistoryIconClick = () => navigate("/history");
 
     return (
         <div className={className}>
@@ -50,7 +51,7 @@ const UserBarContainer = ({ className }) => {
                     </div>
                     <Icon
                         id={"fa-hourglass-half"}
-                        onClick={onFavoritesIconClick}
+                        onClick={onHistoryIconClick}
                         size={"30px"}
                     />
                     <Icon
