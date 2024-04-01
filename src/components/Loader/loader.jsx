@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-export const Loader = styled.div`
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+`;
+
+const LoaderContainer = styled.div`
     width: 100px;
     height: 24px;
     background:
@@ -42,3 +49,11 @@ export const Loader = styled.div`
         }
     }
 `;
+
+export const Loader = () => {
+    return (
+        <Container>
+            <LoaderContainer />
+        </Container>
+    );
+};

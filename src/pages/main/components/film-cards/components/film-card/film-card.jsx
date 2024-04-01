@@ -61,6 +61,7 @@ export const FilmCard = styled(FilmCardContainer)`
     & .imgAndTitle {
         display: flex;
         flex-direction: column;
+        cursor: pointer;
     }
     & .imgAndTitle > h3 {
         height: 30px;

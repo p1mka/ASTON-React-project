@@ -6,6 +6,8 @@ const FilmPage = lazy(() => import("../pages/film/film-page"));
 const RegisterPage = lazy(() => import("../pages/register/register-page"));
 const AuthorizePage = lazy(() => import("../pages/authorize/authorize-page"));
 const FavoritesPage = lazy(() => import("../pages/favorites/favorites-page"));
+const HistoryPage = lazy(() => import("../pages/history/history-page"));
+const SearchPage = lazy(() => import("../pages/search/search-page"));
 
 export const PATHS = {
     MAIN: "/",
@@ -13,6 +15,8 @@ export const PATHS = {
     REGISTRATION: "/registration",
     FILM_CARD: `/:id`,
     FAVORITES: "/favorites",
+    HISTORY: "/history",
+    SEARCH: "/search",
     ERROR: "*",
 };
 
@@ -25,6 +29,8 @@ export const CustomRouter = () => {
                 <Route path={PATHS.REGISTRATION} element={<RegisterPage />} />
                 <Route path={PATHS.FILM_CARD} element={<FilmPage />} />
                 <Route path={PATHS.FAVORITES} element={<FavoritesPage />} />
+                <Route path={PATHS.HISTORY} element={<HistoryPage />} />
+                <Route path={PATHS.SEARCH} element={<SearchPage />} />
                 <Route path={PATHS.ERROR} element={<h1>404 not found</h1>} />
             </Routes>
         </Suspense>

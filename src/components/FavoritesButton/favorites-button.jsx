@@ -33,6 +33,7 @@ const FavoritesButtonContainer = ({
 };
 
 export const FavoritesButton = styled(FavoritesButtonContainer)`
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
