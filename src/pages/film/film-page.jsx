@@ -21,11 +21,11 @@ const FilmPageContainer = ({ className }) => {
     return (
         <div className={className}>
             <img
-                className="filmImage"
+                className="film-image"
                 src={imgUrl}
                 alt="Картинка в пути..."
             ></img>
-            <div className="filmInfo">
+            <div className="film-nfo">
                 <h1>{title}</h1>
                 <p>{countries[0]?.country}</p>
                 <p>{description}</p>
@@ -35,7 +35,7 @@ const FilmPageContainer = ({ className }) => {
     );
 };
 
-export const FilmPage = styled(FilmPageContainer)`
+const FilmPage = styled(FilmPageContainer)`
     width: 100%;
     border: 1px solid black;
     border-radius: 1.5rem;
@@ -43,13 +43,15 @@ export const FilmPage = styled(FilmPageContainer)`
     display: flex;
     align-items: center;
 
-    & .filmImage {
+    & .film-image {
         width: 40%;
     }
 
-    & .filmInfo {
+    & .film-info {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 `;
+
+export default FilmPage;

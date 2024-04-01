@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import styled from "styled-components";
+import { Input } from "../Input/input";
 
 const UserFormContainer = ({ title, handleClick, serverError, className }) => {
     const fieldsScheme = yup.object().shape({
@@ -33,21 +34,21 @@ const UserFormContainer = ({ title, handleClick, serverError, className }) => {
 
     return (
         <div>
-            {formError && <p>{formError}</p>}
             <form className={className} onSubmit={handleSubmit(handleClick)}>
-                <input
+                <Input
                     name="email"
                     type="email"
                     placeholder="e-mail"
                     {...register("email")}
                 />
-                <input
+                <Input
                     name="password"
                     type="password"
                     placeholder="Пароль"
                     {...register("password")}
                 />
                 <button disabled={!!formError}>{title}</button>
+                {formError && <p className="form-error">{formError}</p>}
             </form>
         </div>
     );
@@ -56,9 +57,16 @@ const UserFormContainer = ({ title, handleClick, serverError, className }) => {
 export const UserForm = styled(UserFormContainer)`
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.5rem;
     width: 400px;
-    border: 2px solid #444444;
+    box-shadow: 2px 4px 17px 1px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 2px 4px 17px 1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 4px 17px 1px rgba(0, 0, 0, 0.75);
     border-radius: 0.5rem;
-    padding: 1.5rem;
+    padding: 5rem;
+    margin: 1.5rem 0;
+
+    & .form-error {
+        color: red;
+    }
 `;

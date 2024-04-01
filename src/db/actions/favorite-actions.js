@@ -23,7 +23,7 @@ export const addToFavorites = async (userId, movieId) => {
         const newFavoriteRef = ref(database, `favorites/${userId}/favorites`);
         await push(newFavoriteRef, movieId);
     } catch (err) {
-        return console.log(err);
+        return console.log(err); // TODO
     }
 };
 

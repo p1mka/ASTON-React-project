@@ -15,8 +15,10 @@ const AuthorizePageContainer = ({ className }) => {
     );
 };
 
-export const AuthorizePage = styled(AuthorizePageContainer)`
+const AuthorizePage = styled(AuthorizePageContainer)`
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
+
+export default AuthorizePage;

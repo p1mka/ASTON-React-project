@@ -28,12 +28,14 @@ const FilmCardContainer = ({ film, className }) => {
                 <img src={previewImgUrl} alt={"Картинка в пути..."}></img>
                 <h3>{title}</h3>
             </div>
-            <p>
-                Рейтинг: <b>{rating}</b>
-            </p>
-            <p>
-                Год выхода: <b>{year}</b>
-            </p>
+            <div className="short-info">
+                <p>
+                    Рейтинг: <b>{rating}</b>
+                </p>
+                <p>
+                    Год выхода: <b>{year}</b>
+                </p>
+            </div>
 
             {userId && (
                 <FavoritesButton
@@ -53,17 +55,22 @@ export const FilmCard = styled(FilmCardContainer)`
     width: 250px;
     border-radius: 0.5em;
     margin-bottom: 1.5em;
-    min-height: 450px;
     height: 500px;
+    justify-content: center;
 
     & .imgAndTitle {
         display: flex;
         flex-direction: column;
     }
+    & .imgAndTitle > h3 {
+        height: 30px;
+        overflow: hidden;
+    }
 
     & img {
         width: 250px;
         height: 350px;
+        object-fit: cover;
         border-top-left-radius: 1.5rem;
         border-top-right-radius: 1.5rem;
     }
