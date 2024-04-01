@@ -4,3 +4,4 @@ export * from "./authorize/authorize-page";
 export * from "./register/register-page";
 export * from "./favorites/favorites-page";
 export * from "./history/history-page";
+export * from "./search/search-page";

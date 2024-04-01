@@ -1,19 +1,10 @@
-import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { setSearchPhrase } from "../../../redux";
 import styled from "styled-components";
 
 const HistoryItemContainer = ({ className, keyword, handleRemoveHistory }) => {
-    const dispatch = useDispatch();
-
-    const onKeywordClick = () => dispatch(setSearchPhrase(keyword));
-
     return (
         <div className={className}>
-            <NavLink
-                onClick={onKeywordClick}
-                // to={`/search?beer_name=${historyItem}`}
-            >
+            <NavLink to={`/search?keyword=${keyword}`}>
                 <h4>{keyword}</h4>
             </NavLink>
             <button onClick={() => handleRemoveHistory(keyword)}>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
 import { useDebounce } from "../../../../../hooks";
 import { useGetSearchedFilmsQuery } from "../../../../../redux";
+import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
   from {
@@ -31,14 +31,14 @@ const SuggestsContainer = ({
     searchPhrase,
     setShowResults,
 }) => {
-    const onSuggestClick = (id) => {
-        setShowResults(false);
-    };
-
     const debounceSearch = useDebounce(searchPhrase, 1000);
     const { data: suggests } = useGetSearchedFilmsQuery(debounceSearch, {
         skip: searchPhrase.trim().length <= 0,
     });
+
+    const onSuggestClick = () => {
+        setShowResults(false);
+    };
 
     return (
         <div className={className} onMouseLeave={() => onOutsideClick()}>
@@ -46,23 +46,24 @@ const SuggestsContainer = ({
                 <p>Загрузка данных...</p>
             ) : (
                 <>
-                    {!suggests.length && (
+                    {!suggests.length ? (
                         <h3>Фильмов по Вашему запросу не найдено...</h3>
+                    ) : (
+                        suggests.map(({ id, imgUrl, title }) => (
+                            <Link key={id} to={`/${id}`}>
+                                <div
+                                    className="finded-suggest"
+                                    onClick={onSuggestClick}
+                                >
+                                    <img
+                                        src={imgUrl}
+                                        alt="Изображение недоступно..."
+                                    />
+                                    {title}
+                                </div>
+                            </Link>
+                        ))
                     )}
-                    {suggests.map(({ id, imgUrl, title }) => (
-                        <Link key={id} to={`/${id}`}>
-                            <div
-                                className="finded-suggest"
-                                onClick={() => onSuggestClick(id)}
-                            >
-                                <img
-                                    src={imgUrl}
-                                    alt="Изображение недоступно..."
-                                />
-                                {title}
-                            </div>
-                        </Link>
-                    ))}
                 </>
             )}
         </div>

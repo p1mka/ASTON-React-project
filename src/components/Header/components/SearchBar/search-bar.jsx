@@ -1,36 +1,52 @@
-import { useHistory } from "../../../../hooks";
-import { selectSearchPhrase } from "../../../../redux/selectors";
-import { useDispatch, useSelector } from "react-redux";
+import { useDebounce, useHistory, useQueryParams } from "../../../../hooks";
+import { useGetSearchedFilmsQuery } from "../../../../redux";
 import { Icon } from "../../../Icon/icon";
 import { Input } from "../../../Input/input";
 import { Suggests } from "./components/suggests";
-import { useState } from "react";
-import { setSearchPhrase } from "../../../../redux";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SearchBarContainer = ({ className }) => {
     const [showResults, setShowResults] = useState(false);
+    const keyword = useQueryParams();
+    const [searchPhrase, setSearchPhrase] = useState(keyword || "");
 
-    const searchPhrase = useSelector(selectSearchPhrase);
-    const dispatch = useDispatch();
+    const { userId, addHistory } = useHistory();
 
-    const { addHistory } = useHistory();
+    useEffect(() => {
+        if (keyword) {
+            return setSearchPhrase(keyword);
+        }
+        setSearchPhrase("");
+    }, [keyword]);
 
-    const onSearchInputChange = ({ target }) => {
-        dispatch(setSearchPhrase(target.value));
+    const navigate = useNavigate();
+
+    const onSearchInputChange = (e) => {
+        setSearchPhrase(e.target.value);
         setShowResults(true);
     };
 
+    const onEnterPress = (e) => {
+        if (e.key === "Enter" && searchPhrase) {
+            setShowResults(false);
+            navigate(`/search?keyword=${searchPhrase}`);
+            if (userId) {
+                addHistory(searchPhrase);
+            }
+        }
+    };
+
     const onOutsideClick = () => {
-        dispatch(setSearchPhrase(""));
         if (showResults) {
             setShowResults(false);
         }
     };
 
     const onSearchButtonClick = () => {
-        if (searchPhrase) {
-            console.log(searchPhrase);
+        setShowResults(false);
+        if (searchPhrase && userId) {
             addHistory(searchPhrase);
         }
     };
@@ -41,14 +57,20 @@ const SearchBarContainer = ({ className }) => {
                 width={"500px"}
                 value={searchPhrase}
                 onChange={onSearchInputChange}
+                onKeyUp={onEnterPress}
                 placeholder="Поиск фильма..."
             />
-            <Icon
-                fill={true}
-                id={"fa-magnifying-glass"}
-                size={"24px"}
-                onClick={onSearchButtonClick}
-            />
+            <Link
+                to={`/search?keyword=${searchPhrase}`}
+                disabled={!searchPhrase}
+            >
+                <Icon
+                    fill={true}
+                    id={"fa-magnifying-glass"}
+                    size={"24px"}
+                    onClick={onSearchButtonClick}
+                />
+            </Link>
             {showResults && searchPhrase && (
                 <Suggests
                     show={showResults}

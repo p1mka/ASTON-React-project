@@ -32,5 +32,5 @@ export const useHistory = () => {
         dispatch(removeKeywordFromHistory({ userId, keyword }));
     };
 
-    return { history, isLoading, addHistory, removeHistory };
+    return { history, isLoading, userId, addHistory, removeHistory };
 };
