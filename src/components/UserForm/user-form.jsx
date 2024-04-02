@@ -72,7 +72,10 @@ const UserFormContainer = ({
                                 {...register("password")}
                                 onChange={onErrorsReset}
                             />
-                            <button disabled={!!formError || isLoading}>
+                            <button
+                                type="submit"
+                                disabled={!!formError || isLoading}
+                            >
                                 {title}
                             </button>
                             {formError && (

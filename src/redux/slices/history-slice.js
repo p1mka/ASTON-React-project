@@ -13,7 +13,9 @@ const initialState = {
 export const historySlice = createSlice({
     name: "history",
     initialState,
-    reducers: {},
+    reducers: {
+        clearHistory: () => initialState,
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getHistory.pending, (state) => {
@@ -50,3 +52,5 @@ export const historySlice = createSlice({
             });
     },
 });
+
+export const { clearHistory } = historySlice.actions;
