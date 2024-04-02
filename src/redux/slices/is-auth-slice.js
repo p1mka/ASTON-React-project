@@ -11,7 +11,6 @@ export const isAuthSlice = createSlice({
     reducers: {
         toggleAuth(state, { payload: auth }) {
             state.auth = auth;
-            console.log(1);
         },
         initialize(state, { payload: initializeSuccess }) {
             state.initializeSuccess = initializeSuccess;
