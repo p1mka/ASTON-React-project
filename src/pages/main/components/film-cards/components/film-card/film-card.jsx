@@ -8,9 +8,10 @@ import styled from "styled-components";
 const FilmCardContainer = ({ film, className }) => {
     const userId = useSelector(selectUserId);
 
-    const { id, title, previewImgUrl, rating, year, genres } = film;
+    const { id, title, previewImgUrl, rating, year } = film;
 
-    const { isLoading, getIsFavorite, toggleFavorites } = useFavorites();
+    const { isFavoriteLoading, getIsFavorite, toggleFavorites } =
+        useFavorites();
 
     const isFavorite = getIsFavorite(id);
 
@@ -42,7 +43,7 @@ const FilmCardContainer = ({ film, className }) => {
                     movieId={id}
                     isFavorite={isFavorite}
                     onFavoriteButtonClick={onFavoriteButtonClick}
-                    isLoading={isLoading}
+                    isLoading={isFavoriteLoading}
                 />
             )}
         </div>

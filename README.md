@@ -26,6 +26,7 @@
 
 - [x] Использую Modern Redux with Redux Toolkit 
 - [x] Использую слайсы
+- [x] Есть хотя бы одна кастомная мидлвара
 - [x] Использую RTK Query
 - [x] Использую Transforming Responses
 

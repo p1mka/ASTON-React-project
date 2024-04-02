@@ -22,8 +22,6 @@ export const useInitialize = () => {
                         id: user.uid,
                     })
                 );
-                await dispatch(getFavorites({ userId: user.uid }));
-                dispatch(toggleAuth(true));
             } else {
                 dispatch(removeUser());
             }

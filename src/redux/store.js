@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { filmsApi } from "./filmsApi";
 import { favoritesSlice, historySlice, isAuthSlice, userSlice } from "./slices";
+import { isAuthMiddleware } from "./middlewares/is-auth-midleware";
 
 const rootReducer = combineReducers({
     auth: isAuthSlice.reducer,
@@ -14,5 +15,5 @@ export const store = configureStore({
     reducer: rootReducer,
     devTools: true,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(filmsApi.middleware),
+        getDefaultMiddleware().concat(isAuthMiddleware, filmsApi.middleware),
 });

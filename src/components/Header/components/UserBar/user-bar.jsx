@@ -5,7 +5,6 @@ import { selectUserId } from "../../../../redux/selectors";
 import { signOut } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../../Icon/icon";
-import { clearFavorites } from "../../../../redux";
 import { useFavorites } from "../../../../hooks";
 import styled from "styled-components";
 
@@ -21,7 +20,6 @@ const UserBarContainer = ({ className }) => {
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
-            dispatch(clearFavorites());
             dispatch(removeUser());
             navigate("/");
         });
