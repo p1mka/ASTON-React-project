@@ -3,6 +3,7 @@ import { CustomRouter } from "./routes/CustomRouter";
 import { Header, Loader } from "./components";
 import { useInitialize } from "./hooks";
 import styled from "styled-components";
+import { ThemeProvider } from "./providers/theme-context";
 
 const AppColumn = styled.div`
     position: relative;
@@ -23,12 +24,15 @@ function App() {
         return <Loader />;
     }
     return (
-        <AppColumn>
-            <Header />
-            <MainContainer>
-                <CustomRouter />
-            </MainContainer>
-        </AppColumn>
+        <ThemeProvider>
+            <AppColumn>
+                <Header />
+
+                <MainContainer>
+                    <CustomRouter />
+                </MainContainer>
+            </AppColumn>
+        </ThemeProvider>
     );
 }
 

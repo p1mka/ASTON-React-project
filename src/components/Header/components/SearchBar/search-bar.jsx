@@ -1,4 +1,5 @@
 import { useDebounce, useHistory, useQueryParams } from "../../../../hooks";
+import { useThemeContext } from "../../../../providers/theme-context";
 import { useGetSearchedFilmsQuery } from "../../../../redux";
 import { Icon } from "../../../Icon/icon";
 import { Input } from "../../../Input/input";
@@ -11,6 +12,8 @@ const SearchBarContainer = ({ className }) => {
     const [showResults, setShowResults] = useState(false);
     const keyword = useQueryParams();
     const [searchPhrase, setSearchPhrase] = useState(keyword || "");
+
+    const { headerColor } = useThemeContext();
 
     const { userId, addHistory } = useHistory();
 
@@ -54,6 +57,7 @@ const SearchBarContainer = ({ className }) => {
     return (
         <div className={className}>
             <Input
+                header={headerColor}
                 width={"500px"}
                 value={searchPhrase}
                 onChange={onSearchInputChange}
