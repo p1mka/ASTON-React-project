@@ -23,5 +23,7 @@ export const Icon = styled(IconContainer)`
 
     & :hover {
         cursor: pointer;
+        transform: scale(110%);
+        transition: transform ease 0.2s;
     }
 `;

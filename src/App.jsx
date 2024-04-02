@@ -1,13 +1,9 @@
 import "./App.css";
-import { auth } from "./db/db";
 import { CustomRouter } from "./routes/CustomRouter";
-import { Header } from "./components";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { setUser } from "./redux/slices/user-slice";
-import { getFavorites } from "./redux/thunks/favorite";
+import { Header, Loader } from "./components";
+import { useInitialize } from "./hooks";
 import styled from "styled-components";
+import { ThemeProvider } from "./providers/theme-context";
 
 const AppColumn = styled.div`
     position: relative;
@@ -22,30 +18,21 @@ const MainContainer = styled.div`
 `;
 
 function App() {
-    const dispatch = useDispatch();
+    const initializeSuccess = useInitialize();
 
-    useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                dispatch(
-                    setUser({
-                        email: user.email,
-                        token: user.accessToken,
-                        id: user.uid,
-                    })
-                );
-                dispatch(getFavorites({ userId: user.uid }));
-            }
-        });
-    }, []);
-
+    if (!initializeSuccess) {
+        return <Loader />;
+    }
     return (
-        <AppColumn>
-            <Header />
-            <MainContainer>
-                <CustomRouter />
-            </MainContainer>
-        </AppColumn>
+        <ThemeProvider>
+            <AppColumn>
+                <Header />
+
+                <MainContainer>
+                    <CustomRouter />
+                </MainContainer>
+            </AppColumn>
+        </ThemeProvider>
     );
 }
 

@@ -30,6 +30,9 @@ export const Input = styled(InputContainer)`
     font-size: 18px;
     outline: none;
     transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    color: ${({ header }) => (header === "#eb4cae" ? "#fff" : "#000")};
+    background-color: ${({ header }) =>
+        header === "#a05282" ? "#f4c6c6" : "#fff"};
 
     & input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {

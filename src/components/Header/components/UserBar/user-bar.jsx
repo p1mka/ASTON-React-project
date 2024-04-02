@@ -23,6 +23,7 @@ const UserBarContainer = ({ className }) => {
         signOut(auth).then(() => {
             dispatch(clearFavorites());
             dispatch(removeUser());
+            navigate("/");
         });
     };
 

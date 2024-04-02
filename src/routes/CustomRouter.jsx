@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 const MainPage = lazy(() => import("../pages/main/main-page"));
 const FilmPage = lazy(() => import("../pages/film/film-page"));
@@ -28,8 +29,25 @@ export const CustomRouter = () => {
                 <Route path={PATHS.AUTHORIZE} element={<AuthorizePage />} />
                 <Route path={PATHS.REGISTRATION} element={<RegisterPage />} />
                 <Route path={PATHS.FILM_CARD} element={<FilmPage />} />
-                <Route path={PATHS.FAVORITES} element={<FavoritesPage />} />
-                <Route path={PATHS.HISTORY} element={<HistoryPage />} />
+
+                <Route
+                    path={PATHS.FAVORITES}
+                    element={
+                        <ProtectedRoute>
+                            <FavoritesPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path={PATHS.HISTORY}
+                    element={
+                        <ProtectedRoute>
+                            <HistoryPage />
+                        </ProtectedRoute>
+                    }
+                />
+
                 <Route path={PATHS.SEARCH} element={<SearchPage />} />
                 <Route path={PATHS.ERROR} element={<h1>404 not found</h1>} />
             </Routes>

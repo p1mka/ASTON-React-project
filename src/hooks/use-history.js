@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 export const useHistory = () => {
     const dispatch = useDispatch();
     const userId = useSelector(selectUserId);
+
     useEffect(() => {
         if (userId) {
             dispatch(getHistory({ userId }));
