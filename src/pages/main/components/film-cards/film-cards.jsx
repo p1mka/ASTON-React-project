@@ -14,6 +14,6 @@ const FilmCardsContainer = ({ films, className }) => {
 export const FilmCards = styled(FilmCardsContainer)`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap: 0 2rem;
     align-items: center;
 `;

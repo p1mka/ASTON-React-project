@@ -1,4 +1,5 @@
 import { Icon } from "../Icon/icon";
+import { FavoritesLoader } from "./components/favorites-loader";
 import styled from "styled-components";
 
 const FavoritesButtonContainer = ({
@@ -21,19 +22,16 @@ const FavoritesButtonContainer = ({
         </div>
     );
 
-    return isLoading ? (
-        <div className={className}>
-            <div className="loader"></div>
-        </div>
-    ) : (
+    return (
         <button className={className} onClick={onFavoriteButtonClick}>
-            {buttonInnerText}
+            {isLoading ? <FavoritesLoader /> : buttonInnerText}
         </button>
     );
 };
 
 export const FavoritesButton = styled(FavoritesButtonContainer)`
     cursor: pointer;
+    object-fit: contain;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +42,7 @@ export const FavoritesButton = styled(FavoritesButtonContainer)`
     border: none;
     border-radius: 0.5rem;
     background-color: ${({ isFavorite }) =>
-        !isFavorite ? "#2b7c3d" : "#777777"};
+        !isFavorite ? "#2b7c3d" : "#bc6d6d"};
     color: #fff;
     -webkit-box-shadow: 3px 3px 5px 0px rgba(148, 148, 148, 1);
     -moz-box-shadow: 3px 3px 5px 0px rgba(148, 148, 148, 1);
@@ -54,31 +52,5 @@ export const FavoritesButton = styled(FavoritesButtonContainer)`
         display: flex;
         align-items: center;
         gap: 1rem;
-    }
-
-    & .loader {
-        height: 4px;
-        width: 130px;
-        --c: no-repeat linear-gradient(#6100ee 0 0);
-        background: var(--c), var(--c), #d7b8fc;
-        background-size: 60% 100%;
-        animation: l16 3s infinite;
-    }
-    @keyframes l16 {
-        0% {
-            background-position:
-                -150% 0,
-                -150% 0;
-        }
-        66% {
-            background-position:
-                250% 0,
-                -150% 0;
-        }
-        100% {
-            background-position:
-                250% 0,
-                250% 0;
-        }
     }
 `;

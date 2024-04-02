@@ -4,14 +4,17 @@ import { setUser } from "../../redux/slices/user-slice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UserForm } from "../UserForm/user-form";
+import { useState } from "react";
 
 export const Login = () => {
-    let serverError = "";
+    const [serverError, setServerError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleLogin = ({ email, password }) => {
-        signInWithEmailAndPassword(auth, email, password)
+    const handleLogin = async ({ email, password }) => {
+        setIsLoading(true);
+        await signInWithEmailAndPassword(auth, email, password)
             .then(({ user }) => {
                 dispatch(
                     setUser({
@@ -20,16 +23,24 @@ export const Login = () => {
                         id: user.uid,
                     })
                 );
-
                 navigate("/");
             })
-            .catch((e) => (serverError = e)); //TODO
+            .catch((e) => {
+                switch (e.code) {
+                    case "auth/invalid-credential":
+                        setServerError("Неверный email или пароль");
+                        break;
+                }
+            })
+            .finally(() => setIsLoading(false));
     };
 
     return (
         <UserForm
             title="Вход"
+            isLoading={isLoading}
             serverError={serverError}
+            setServerError={setServerError}
             handleClick={handleLogin}
         />
     );

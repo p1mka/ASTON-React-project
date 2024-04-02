@@ -1,31 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-    selectFavoritesIds,
-    selectFavoritesIsLoading,
-    selectUserId,
-} from "../redux/selectors";
+import { selectFavoritesIds, selectUserId } from "../redux/selectors";
 import { addFavorite, removeFavorite } from "../redux/thunks/favorite";
+import { useState } from "react";
 
 export const useFavorites = () => {
+    const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
+
     const dispatch = useDispatch();
     const favoritesIds = useSelector(selectFavoritesIds);
-    const isLoading = useSelector(selectFavoritesIsLoading);
     const userId = useSelector(selectUserId);
 
     const favoritesCount = favoritesIds.length;
 
     const getIsFavorite = (movieId) => favoritesIds.includes(movieId);
 
-    const toggleFavorites = (movieId) => {
+    const toggleFavorites = async (movieId) => {
         if (!getIsFavorite(movieId)) {
-            dispatch(addFavorite({ userId, movieId }));
+            setIsFavoriteLoading(true);
+            await dispatch(addFavorite({ userId, movieId }));
+            setIsFavoriteLoading(false);
         } else {
-            dispatch(removeFavorite({ userId, movieId }));
+            setIsFavoriteLoading(true);
+            await dispatch(removeFavorite({ userId, movieId }));
+            setIsFavoriteLoading(false);
         }
     };
 
     return {
-        isLoading,
+        isFavoriteLoading,
         favoritesCount,
         favoritesIds,
         getIsFavorite,
