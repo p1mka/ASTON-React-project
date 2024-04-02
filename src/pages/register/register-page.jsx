@@ -18,6 +18,15 @@ const RegisterPage = styled(RegisterPageContainer)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    & a {
+        font-size: 18px;
+        color: green;
+        font-weight: bold;
+    }
+
+    & a:hover {
+        color: #6ac167;
+    }
 `;
 
 export default RegisterPage;
