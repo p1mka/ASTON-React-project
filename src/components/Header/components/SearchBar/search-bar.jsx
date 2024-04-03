@@ -1,6 +1,5 @@
-import { useDebounce, useHistory, useQueryParams } from "../../../../hooks";
+import { useHistory, useQueryParams } from "../../../../hooks";
 import { useThemeContext } from "../../../../providers/theme-context";
-import { useGetSearchedFilmsQuery } from "../../../../redux";
 import { Icon } from "../../../Icon/icon";
 import { Input } from "../../../Input/input";
 import { Suggests } from "./components/suggests";

@@ -1,13 +1,7 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const IconContainer = ({
-    className,
-    children,
-    id,
-    fill = false,
-    social = false,
-    ...props
-}) => {
+const IconContainer = ({ className, children, id, fill = false, ...props }) => {
     const iconFill = fill ? "fa-solid" : "fa-regular";
     return (
         <div className={className} {...props}>
@@ -27,3 +21,9 @@ export const Icon = styled(IconContainer)`
         transition: transform ease 0.2s;
     }
 `;
+
+Icon.propTypes = {
+    children: PropTypes.node,
+    id: PropTypes.string.isRequired,
+    fill: PropTypes.bool,
+};

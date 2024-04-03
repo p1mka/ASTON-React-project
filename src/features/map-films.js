@@ -9,8 +9,8 @@ export const mapFilms = (films) => {
             imgUrl: film.posterUrl,
             previewImgUrl: film.posterUrlPreview,
             genres: film.genres,
-            rating: film.ratingKinopoisk || film.rating,
-            year: film.year,
+            rating: String(film.ratingKinopoisk) || String(film.rating),
+            year: String(film.year),
         };
     });
 };

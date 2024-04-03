@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const InputContainer = forwardRef(
@@ -46,3 +47,11 @@ export const Input = styled(InputContainer)`
         -moz-appearance: textfield;
     }
 `;
+
+Input.propTypes = {
+    type: PropTypes.string,
+    children: PropTypes.node,
+    title: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    onKeyUp: PropTypes.func,
+};

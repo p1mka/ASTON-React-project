@@ -6,6 +6,6 @@ export const mapFilm = (film) => ({
     imgUrl: film?.posterUrl,
     previewImgUrl: film?.posterUrlPreview,
     genres: film?.genres,
-    rating: film?.ratingKinopoisk,
-    year: film?.year,
+    rating: String(film?.ratingKinopoisk) || "0",
+    year: String(film?.year),
 });

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { SearchBar, UserBar } from "./components";
 import { useThemeContext } from "../../providers/theme-context";
-import styled from "styled-components";
 import { Icon } from "../Icon/icon";
+import styled from "styled-components";
 
 const HeaderContainer = ({ className }) => {
     const { headerColor, changeHeaderColor } = useThemeContext();

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import PropTypes from "prop-types";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../Input/input";
@@ -106,3 +107,11 @@ export const UserForm = styled(UserFormContainer)`
         color: red;
     }
 `;
+
+UserForm.propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    handleClick: PropTypes.func.isRequired,
+    serverError: PropTypes.oneOfType([PropTypes.string, PropTypes.exact(null)]),
+    setServerError: PropTypes.func,
+};

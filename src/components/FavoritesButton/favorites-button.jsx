@@ -1,5 +1,6 @@
 import { Icon } from "../Icon/icon";
 import { FavoritesLoader } from "./components/favorites-loader";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const FavoritesButtonContainer = ({
@@ -54,3 +55,9 @@ export const FavoritesButton = styled(FavoritesButtonContainer)`
         gap: 1rem;
     }
 `;
+
+FavoritesButton.propTypes = {
+    isFavorite: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool,
+    onFavoriteButtonClick: PropTypes.func.isRequired,
+};

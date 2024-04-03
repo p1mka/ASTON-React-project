@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const HistoryItemContainer = ({ className, keyword, handleRemoveHistory }) => {
@@ -24,5 +25,10 @@ const HistoryItem = styled(HistoryItemContainer)`
         color: green;
     }
 `;
+
+HistoryItem.propTypes = {
+    keyword: PropTypes.string.isRequired,
+    handleRemoveHistory: PropTypes.func.isRequired,
+};
 
 export default HistoryItem;
