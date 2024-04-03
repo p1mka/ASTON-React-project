@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { ProtectedAuthRoute } from "./ProtectedAuthRoute";
 
 const MainPage = lazy(() => import("../pages/main/main-page"));
 const FilmPage = lazy(() => import("../pages/film/film-page"));
@@ -26,8 +27,22 @@ export const CustomRouter = () => {
         <Suspense fallback={<div>Загрузка страницы...</div>}>
             <Routes>
                 <Route path={PATHS.MAIN} element={<MainPage />} />
-                <Route path={PATHS.AUTHORIZE} element={<AuthorizePage />} />
-                <Route path={PATHS.REGISTRATION} element={<RegisterPage />} />
+                <Route
+                    path={PATHS.AUTHORIZE}
+                    element={
+                        <ProtectedAuthRoute>
+                            <AuthorizePage />
+                        </ProtectedAuthRoute>
+                    }
+                />
+                <Route
+                    path={PATHS.REGISTRATION}
+                    element={
+                        <ProtectedAuthRoute>
+                            <RegisterPage />
+                        </ProtectedAuthRoute>
+                    }
+                />
                 <Route path={PATHS.FILM_CARD} element={<FilmPage />} />
 
                 <Route
@@ -49,7 +64,10 @@ export const CustomRouter = () => {
                 />
 
                 <Route path={PATHS.SEARCH} element={<SearchPage />} />
-                <Route path={PATHS.ERROR} element={<h1>404 not found</h1>} />
+                <Route
+                    path={PATHS.ERROR}
+                    element={<h1>Страница не найдена...</h1>}
+                />
             </Routes>
         </Suspense>
     );
