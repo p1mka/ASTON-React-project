@@ -16,15 +16,16 @@ export const getHistory = createAsyncThunk(
 export const addKeywordToHistory = createAsyncThunk(
     "history/addKeywordToHistory",
     async ({ userId, keyword }) => {
-        await addToHistory(userId, keyword);
-        return keyword;
+        const keywordWithId = await addToHistory(userId, keyword);
+
+        return keywordWithId;
     }
 );
 
 export const removeKeywordFromHistory = createAsyncThunk(
     "history/removeKeywordFromHistory",
-    async ({ userId, keyword }) => {
-        await removeFromHistory(userId, keyword);
-        return keyword;
+    async ({ userId, id }) => {
+        await removeFromHistory(userId, id);
+        return id;
     }
 );
