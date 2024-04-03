@@ -7,14 +7,15 @@ export const useThemeContext = () => useContext(ThemeContext);
 export const ThemeProvider = ({ children }) => {
     const [headerColor, setHeaderColor] = useState("#fff");
 
-    const changeHeaderColor = () => {
-        headerColor === "#fff"
-            ? setHeaderColor("#a05282")
-            : setHeaderColor("#fff");
-    };
-
     const contextValue = useMemo(
-        () => ({ headerColor, changeHeaderColor }),
+        () => ({
+            headerColor,
+            changeHeaderColor: () => {
+                headerColor === "#fff"
+                    ? setHeaderColor("#a05282")
+                    : setHeaderColor("#fff");
+            },
+        }),
         [headerColor]
     );
 

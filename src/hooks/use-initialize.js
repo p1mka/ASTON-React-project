@@ -13,7 +13,7 @@ export const useInitialize = () => {
     const initializeSuccess = useSelector(selectInitializeSuccess);
 
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 dispatch(
                     setUser({
@@ -27,6 +27,7 @@ export const useInitialize = () => {
             }
             dispatch(initialize(true));
         });
+        return () => unsubscribe();
     }, [dispatch, initialize, toggleAuth]);
     return initializeSuccess;
 };
