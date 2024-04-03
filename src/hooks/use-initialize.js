@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { isAuthSlice, removeUser, setUser } from "../redux";
 import { selectInitializeSuccess } from "../redux/selectors";
 import { auth } from "../db/db";
-import { getFavorites } from "../redux/thunks/favorite";
 
 export const useInitialize = () => {
     const dispatch = useDispatch();

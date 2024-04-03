@@ -2,8 +2,8 @@ import "./App.css";
 import { CustomRouter } from "./routes/CustomRouter";
 import { Header, Loader } from "./components";
 import { useInitialize } from "./hooks";
-import styled from "styled-components";
 import { ThemeProvider } from "./providers/theme-context";
+import styled from "styled-components";
 
 const AppColumn = styled.div`
     position: relative;

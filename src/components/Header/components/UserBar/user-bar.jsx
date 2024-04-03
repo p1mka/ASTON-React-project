@@ -1,12 +1,13 @@
 import { auth } from "../../../../db/db";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../../../redux/slices/user-slice";
-import { selectUserId } from "../../../../redux/selectors";
+import { selectUserEmail, selectUserId } from "../../../../redux/selectors";
 import { signOut } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../../Icon/icon";
 import { useFavorites } from "../../../../hooks";
 import styled from "styled-components";
+import { extractUsernameFromEmail } from "../../../../features/extract-username-from-email";
 
 const UserBarContainer = ({ className }) => {
     const dispatch = useDispatch();
@@ -14,6 +15,8 @@ const UserBarContainer = ({ className }) => {
     const navigate = useNavigate();
 
     const userId = useSelector(selectUserId);
+    const userEmail = useSelector(selectUserEmail);
+
     const { favoritesCount } = useFavorites();
 
     const onLoginIconClick = () => navigate("/authorize");
@@ -31,34 +34,37 @@ const UserBarContainer = ({ className }) => {
     return (
         <div className={className}>
             {userId ? (
-                <div className="nav-buttons">
-                    <div className="elements-column">
+                <div className="user-bar-container">
+                    <h3>{extractUsernameFromEmail(userEmail)}</h3>
+                    <div className="nav-buttons">
+                        <div className="elements-column">
+                            <Icon
+                                fill={true}
+                                id={"fa-heart"}
+                                onClick={onFavoritesIconClick}
+                                size={"30px"}
+                            />
+                            {favoritesCount !== 0 && (
+                                <div
+                                    className="circle"
+                                    onClick={onFavoritesIconClick}
+                                >
+                                    {favoritesCount}
+                                </div>
+                            )}
+                        </div>
                         <Icon
-                            fill={true}
-                            id={"fa-heart"}
-                            onClick={onFavoritesIconClick}
+                            id={"fa-hourglass-half"}
+                            onClick={onHistoryIconClick}
                             size={"30px"}
                         />
-                        {favoritesCount !== 0 && (
-                            <div
-                                className="circle"
-                                onClick={onFavoritesIconClick}
-                            >
-                                {favoritesCount}
-                            </div>
-                        )}
+                        <Icon
+                            fill={true}
+                            id={"fa-right-from-bracket"}
+                            size={"30px"}
+                            onClick={handleSignOut}
+                        />
                     </div>
-                    <Icon
-                        id={"fa-hourglass-half"}
-                        onClick={onHistoryIconClick}
-                        size={"30px"}
-                    />
-                    <Icon
-                        fill={true}
-                        id={"fa-right-from-bracket"}
-                        size={"30px"}
-                        onClick={handleSignOut}
-                    />
                 </div>
             ) : (
                 <div className="login">
@@ -80,6 +86,12 @@ export const UserBar = styled(UserBarContainer)`
     align-items: center;
     justify-content: center;
     gap: 1rem;
+
+    & .user-bar-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     & .nav-buttons {
         display: flex;
