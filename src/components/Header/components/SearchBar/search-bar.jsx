@@ -4,12 +4,14 @@ import { Icon } from "../../../Icon/icon";
 import { Input } from "../../../Input/input";
 import { Suggests } from "./components/suggests";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useMatch } from "react-router-dom";
 import styled from "styled-components";
 
 const SearchBarContainer = ({ className }) => {
     const [showResults, setShowResults] = useState(false);
+
     const keyword = useQueryParams();
+
     const [searchPhrase, setSearchPhrase] = useState(keyword || "");
 
     const { headerColor } = useThemeContext();
@@ -60,7 +62,9 @@ const SearchBarContainer = ({ className }) => {
                 width={"500px"}
                 value={searchPhrase}
                 onChange={onSearchInputChange}
+                onFocus={onSearchInputChange}
                 onKeyUp={onEnterPress}
+                onMouseEnter={onSearchInputChange}
                 placeholder="Поиск фильма..."
             />
             <Link

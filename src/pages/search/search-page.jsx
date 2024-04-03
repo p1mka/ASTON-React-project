@@ -23,7 +23,7 @@ const SearchPageContainer = ({ className }) => {
 
     return (
         <div className={className}>
-            <h2>Результаты поиска</h2>
+            <h2>Результаты поиска по запросу {searchKeyword}</h2>
             {films.length ? (
                 <FilmCards films={films} />
             ) : (

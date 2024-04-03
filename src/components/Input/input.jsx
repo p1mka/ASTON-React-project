@@ -4,7 +4,18 @@ import styled from "styled-components";
 
 const InputContainer = forwardRef(
     (
-        { className, type, children, title, onChange, onKeyUp, ...props },
+        {
+            className,
+            type,
+            children,
+            title,
+            onChange,
+            onKeyUp,
+            onFocus,
+            onBlur,
+            onMouseEnter,
+            ...props
+        },
         ref
     ) => (
         <input
@@ -13,6 +24,9 @@ const InputContainer = forwardRef(
             title={title}
             onChange={onChange}
             onKeyUp={onKeyUp}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onMouseEnter={onMouseEnter}
             {...props}
             ref={ref}
         >
@@ -54,4 +68,7 @@ Input.propTypes = {
     title: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onKeyUp: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onMouseEnter: PropTypes.func,
 };
