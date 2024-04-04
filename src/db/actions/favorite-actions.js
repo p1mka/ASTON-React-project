@@ -14,7 +14,7 @@ export const getFavoritesIds = async (userId) => {
 
         return moviesIds;
     } catch (err) {
-        return err;
+        return { error: err };
     }
 };
 
@@ -23,7 +23,7 @@ export const addToFavorites = async (userId, movieId) => {
         const newFavoriteRef = ref(database, `favorites/${userId}/favorites`);
         await push(newFavoriteRef, movieId);
     } catch (err) {
-        return console.log(err); // TODO
+        return { error: err };
     }
 };
 

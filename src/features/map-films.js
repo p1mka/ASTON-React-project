@@ -9,8 +9,17 @@ export const mapFilms = (films) => {
             imgUrl: film.posterUrl,
             previewImgUrl: film.posterUrlPreview,
             genres: film.genres,
-            rating: film.ratingKinopoisk || film.rating,
-            year: film.year,
+            rating: film.ratingKinopoisk
+                ? String(film.ratingKinopoisk)
+                : film.ratingKinopoisk === null ||
+                    film.rating === "null" ||
+                    film.rating === "undefined"
+                  ? "0"
+                  : film.rating,
+            year:
+                film.year === "null" || film.year === null
+                    ? "Неизвестен"
+                    : String(film.year),
         };
     });
 };

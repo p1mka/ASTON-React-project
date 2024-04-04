@@ -7,37 +7,34 @@ export const getHistoryFromDb = async (userId) => {
 
         const keywords = await get(historyRef).then((snapshot) => {
             if (snapshot.val()) {
-                return Object.values(snapshot.val());
+                const dataArr = Object.entries(snapshot.val());
+                return dataArr.map(([id, keyword]) => ({ id, keyword }));
             }
             return [];
         });
 
         return keywords;
     } catch (err) {
-        return err;
+        return { error: err };
     }
 };
 
 export const addToHistory = async (userId, keywords) => {
     try {
         const newHistoryRef = ref(database, `history/${userId}/history`);
-        await push(newHistoryRef, keywords);
+        const newKeywordRef = await push(newHistoryRef, keywords);
+
+        const newKeywordId = newKeywordRef.key;
+
+        return { id: newKeywordId, keyword: keywords };
     } catch (err) {
-        return console.log(err); // TODO
+        return { error: err };
     }
 };
 
-export const removeFromHistory = async (userId, keyword) => {
+export const removeFromHistory = async (userId, id) => {
     try {
-        const historyRef = ref(database, `history/${userId}/history`);
-        const snapshot = await get(historyRef);
-        if (snapshot.exists()) {
-            snapshot.forEach((childSnapshot) => {
-                if (childSnapshot.val() === keyword) {
-                    remove(childSnapshot.ref);
-                }
-            });
-        }
+        await remove(ref(database, `history/${userId}/history/${id}`));
     } catch (err) {
         return { error: err };
     }

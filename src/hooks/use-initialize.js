@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { isAuthSlice, removeUser, setUser } from "../redux";
 import { selectInitializeSuccess } from "../redux/selectors";
 import { auth } from "../db/db";
-import { getFavorites } from "../redux/thunks/favorite";
 
 export const useInitialize = () => {
     const dispatch = useDispatch();
@@ -13,7 +12,7 @@ export const useInitialize = () => {
     const initializeSuccess = useSelector(selectInitializeSuccess);
 
     useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 dispatch(
                     setUser({
@@ -27,6 +26,7 @@ export const useInitialize = () => {
             }
             dispatch(initialize(true));
         });
+        return () => unsubscribe();
     }, [dispatch, initialize, toggleAuth]);
     return initializeSuccess;
 };

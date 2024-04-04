@@ -1,9 +1,21 @@
 import { forwardRef } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const InputContainer = forwardRef(
     (
-        { className, type, children, title, onChange, onKeyUp, ...props },
+        {
+            className,
+            type,
+            children,
+            title,
+            onChange,
+            onKeyUp,
+            onFocus,
+            onBlur,
+            onMouseEnter,
+            ...props
+        },
         ref
     ) => (
         <input
@@ -12,6 +24,9 @@ const InputContainer = forwardRef(
             title={title}
             onChange={onChange}
             onKeyUp={onKeyUp}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onMouseEnter={onMouseEnter}
             {...props}
             ref={ref}
         >
@@ -46,3 +61,14 @@ export const Input = styled(InputContainer)`
         -moz-appearance: textfield;
     }
 `;
+
+Input.propTypes = {
+    type: PropTypes.string,
+    children: PropTypes.node,
+    title: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    onKeyUp: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onMouseEnter: PropTypes.func,
+};

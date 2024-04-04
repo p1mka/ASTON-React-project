@@ -43,7 +43,7 @@ export const historySlice = createSlice({
             })
             .addCase(removeKeywordFromHistory.fulfilled, (state, action) => {
                 state.keywords = state.keywords.filter(
-                    (item) => item !== action.payload
+                    (item) => item.id !== action.payload
                 );
                 state.isLoading = false;
             })

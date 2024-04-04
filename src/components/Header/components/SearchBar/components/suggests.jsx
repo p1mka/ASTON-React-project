@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useDebounce } from "../../../../../hooks";
 import { useGetSearchedFilmsQuery } from "../../../../../redux";
 import styled, { keyframes } from "styled-components";
@@ -113,3 +114,9 @@ export const Suggests = styled(SuggestsContainer)`
         color: #000;
     }
 `;
+
+Suggests.propTypes = {
+    onOutsideClick: PropTypes.func,
+    searchPhrase: PropTypes.string.isRequired,
+    setShowResults: PropTypes.func,
+};

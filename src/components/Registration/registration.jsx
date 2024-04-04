@@ -29,7 +29,6 @@ export const Registration = () => {
                 navigate("/");
             })
             .catch((e) => {
-                console.log(e.code);
                 switch (e.code) {
                     case "auth/email-already-in-use":
                         setServerError("Этот e-mail уже зарегистрирован!");

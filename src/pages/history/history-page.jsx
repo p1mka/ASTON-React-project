@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import { useHistory } from "../../hooks";
 import HistoryItem from "./components/history-item";
 import { Loader } from "../../components";
+import styled from "styled-components";
 
 const HistoryPageContainer = ({ className }) => {
     const { history, isLoading, removeHistory } = useHistory();
@@ -15,9 +15,10 @@ const HistoryPageContainer = ({ className }) => {
             <h1>История поиска</h1>
 
             {history.length ? (
-                history.map((keyword, id) => (
+                history.map(({ id, keyword }) => (
                     <HistoryItem
                         key={id}
+                        id={id}
                         keyword={keyword}
                         handleRemoveHistory={removeHistory}
                     />

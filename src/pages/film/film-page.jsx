@@ -87,7 +87,6 @@ const FilmPage = styled(FilmPageContainer)`
         align-items: center;
     }
     & .description {
-        /* border: 1px solid black; */
         border-radius: 1rem;
         padding: 1.5rem 0;
     }

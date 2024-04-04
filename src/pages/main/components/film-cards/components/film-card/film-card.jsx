@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import { FavoritesButton } from "../../../../../../components";
 import { useFavorites } from "../../../../../../hooks";
 import { selectUserId } from "../../../../../../redux/selectors";
@@ -77,3 +78,13 @@ export const FilmCard = styled(FilmCardContainer)`
         border-top-right-radius: 1.5rem;
     }
 `;
+
+FilmCard.propTypes = {
+    film: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        previewImgUrl: PropTypes.string.isRequired,
+        rating: PropTypes.string.isRequired,
+        year: PropTypes.string.isRequired,
+    }),
+};

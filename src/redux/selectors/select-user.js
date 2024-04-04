@@ -6,3 +6,7 @@ export const selectUserId = createSelector(
     [selectUserState],
     (userState) => userState.id
 );
+export const selectUserEmail = createSelector(
+    [selectUserState],
+    (userState) => userState.email
+);
