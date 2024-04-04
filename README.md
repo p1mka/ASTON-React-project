@@ -1,5 +1,6 @@
 # Movies-library
 - API: [KinopoiskAPI](https://kinopoiskapiunofficial.tech)
+- Deploy: (https://aston-react-project.vercel.app/)
 
 ## Основной функционал
 
@@ -37,3 +38,4 @@
 ### 2 уровень 
 
 - [x] Использую [Firebase](src/db/db.js)
+- [x] Настроен CI/CD
