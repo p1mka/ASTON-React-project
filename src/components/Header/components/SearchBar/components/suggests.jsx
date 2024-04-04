@@ -79,7 +79,7 @@ export const Suggests = styled(SuggestsContainer)`
     position: fixed;
     background: #f0f0f0;
     min-height: 6rem;
-    top: 5.8rem;
+    top: 6.5rem;
     left: 5px;
     right: 5px;
     box-shadow: 5px 3px 6px 0px rgba(0, 0, 0, 0.1);
