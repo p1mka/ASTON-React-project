@@ -1,10 +1,9 @@
-import { auth } from "../../db/db";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { setUser } from "../../redux/slices/user-slice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UserForm } from "../UserForm/user-form";
 import { useState } from "react";
+import { loginUser } from "../../db/actions";
 
 export const Login = () => {
     const [serverError, setServerError] = useState(null);
@@ -14,7 +13,8 @@ export const Login = () => {
     const navigate = useNavigate();
     const handleLogin = async ({ email, password }) => {
         setIsLoading(true);
-        await signInWithEmailAndPassword(auth, email, password)
+
+        await loginUser(email, password)
             .then(({ user }) => {
                 dispatch(
                     setUser({
@@ -25,8 +25,8 @@ export const Login = () => {
                 );
                 navigate("/");
             })
-            .catch((e) => {
-                switch (e.code) {
+            .catch((err) => {
+                switch (err) {
                     case "auth/invalid-credential":
                         setServerError("Неверный email или пароль");
                         break;

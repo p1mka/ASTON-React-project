@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../db/db";
 import { useDispatch } from "react-redux";
 import { UserForm } from "../UserForm/user-form";
 import { setUser } from "../../redux/slices";
+import { registerUser } from "../../db/actions";
 
 export const Registration = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +15,7 @@ export const Registration = () => {
 
     const handleRegister = async ({ email, password }) => {
         setIsLoading(true);
-        await createUserWithEmailAndPassword(auth, email, password)
+        await registerUser(email, password)
             .then(({ user }) => {
                 dispatch(
                     setUser({
