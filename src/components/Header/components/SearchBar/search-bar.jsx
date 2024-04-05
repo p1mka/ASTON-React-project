@@ -1,13 +1,14 @@
-import { useHistory, useQueryParams } from "../../../../hooks";
+import { useDebounce, useHistory, useQueryParams } from "../../../../hooks";
 import { useThemeContext } from "../../../../providers/theme-context";
 import { Icon } from "../../../Icon/icon";
 import { Input } from "../../../Input/input";
-import { Suggests } from "./components/suggests";
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useMatch } from "react-router-dom";
+import { Suggests } from "../../../Suggests/suggests";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SearchBarContainer = ({ className }) => {
+    const searchInputRef = useRef(null);
     const [showResults, setShowResults] = useState(false);
 
     const keyword = useQueryParams();
@@ -17,6 +18,8 @@ const SearchBarContainer = ({ className }) => {
     const { headerColor } = useThemeContext();
 
     const { userId, addHistory } = useHistory();
+
+    const debounceSearch = useDebounce(searchPhrase, 500);
 
     useEffect(() => {
         if (keyword) {
@@ -43,6 +46,9 @@ const SearchBarContainer = ({ className }) => {
     };
 
     const onOutsideClick = () => {
+        if (searchInputRef.current) {
+            searchInputRef.current.blur();
+        }
         if (showResults) {
             setShowResults(false);
         }
@@ -58,13 +64,13 @@ const SearchBarContainer = ({ className }) => {
     return (
         <div className={className}>
             <Input
+                ref={searchInputRef}
                 header={headerColor}
                 width={"500px"}
                 value={searchPhrase}
                 onChange={onSearchInputChange}
                 onFocus={onSearchInputChange}
                 onKeyUp={onEnterPress}
-                onMouseEnter={onSearchInputChange}
                 placeholder="Поиск фильма..."
             />
             <Link
@@ -78,11 +84,11 @@ const SearchBarContainer = ({ className }) => {
                     onClick={onSearchButtonClick}
                 />
             </Link>
-            {showResults && searchPhrase && (
+            {searchPhrase && (
                 <Suggests
                     show={showResults}
                     onOutsideClick={onOutsideClick}
-                    searchPhrase={searchPhrase}
+                    searchPhrase={debounceSearch}
                     setShowResults={setShowResults}
                 />
             )}

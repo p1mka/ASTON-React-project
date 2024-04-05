@@ -1,5 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectFavoritesIds, selectUserId } from "../redux/selectors";
+import {
+    selectFavoritesIds,
+    selectFavoritesIsLoading,
+    selectUserId,
+} from "../redux/selectors";
 import { addFavorite, removeFavorite } from "../redux/thunks/favorite";
 import { useState } from "react";
 
@@ -8,6 +12,8 @@ export const useFavorites = () => {
 
     const dispatch = useDispatch();
     const favoritesIds = useSelector(selectFavoritesIds);
+    const isFavoritesIdsLoading = useSelector(selectFavoritesIsLoading);
+
     const userId = useSelector(selectUserId);
 
     const favoritesCount = favoritesIds.length;
@@ -27,6 +33,8 @@ export const useFavorites = () => {
     };
 
     return {
+        userId,
+        isFavoritesIdsLoading,
         isFavoriteLoading,
         favoritesCount,
         favoritesIds,

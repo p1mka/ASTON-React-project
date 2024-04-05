@@ -22,7 +22,7 @@
 - [x] Есть применение **[Контекст API](src/providers/theme-context.jsx)**
 - [x] Есть применение **[предохранителя](src/features/error-boundary.jsx)**
 - [x] Есть хотя бы один кастомный **[хук](src/hooks)**
-- [x] Хотя бы несколько компонентов используют PropTypes [suggests](src/components/Header/components/SearchBar/components/suggests.jsx) [history](src/pages/history/components/history-item.jsx)
+- [x] Хотя бы несколько компонентов используют PropTypes [suggests](src/components/Suggests/suggests.jsx) [history](src/pages/history/components/history-item.jsx)
 - [x] Поиск не триггерит много запросов к серверу [debounce](src/hooks/use-debounce.js) 
 - [x] Есть применение [lazy + Suspense](src/routes/CustomRouter.jsx)
 

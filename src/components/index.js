@@ -7,3 +7,5 @@ export * from "./FavoritesButton/favorites-button";
 export * from "./Icon/icon";
 export * from "./Input/input";
 export * from "./SimpleLoader/simple-loader";
+export * from "./Suggests/suggests";
+export * from "./FavoritesLoader/favorites-loader";

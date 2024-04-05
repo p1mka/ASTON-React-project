@@ -1,6 +1,6 @@
 import { Icon } from "../Icon/icon";
-import { FavoritesLoader } from "./components/favorites-loader";
 import PropTypes from "prop-types";
+import { FavoritesLoader } from "../FavoritesLoader/favorites-loader";
 import styled from "styled-components";
 
 const FavoritesButtonContainer = ({

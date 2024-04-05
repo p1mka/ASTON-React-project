@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { FavoritesButton } from "../../../../../../components";
+import { FavoritesButton, FavoritesLoader } from "../../../../../../components";
 import { useFavorites } from "../../../../../../hooks";
-import { selectUserId } from "../../../../../../redux/selectors";
 import styled from "styled-components";
 
 const FilmCardContainer = ({ film, className }) => {
-    const userId = useSelector(selectUserId);
-
     const { id, title, previewImgUrl, rating, year } = film;
 
-    const { isFavoriteLoading, getIsFavorite, toggleFavorites } =
-        useFavorites();
+    const {
+        userId,
+        isFavoritesIdsLoading,
+        isFavoriteLoading,
+        getIsFavorite,
+        toggleFavorites,
+    } = useFavorites();
 
     const isFavorite = getIsFavorite(id);
 
@@ -23,7 +24,6 @@ const FilmCardContainer = ({ film, className }) => {
     const navigate = useNavigate();
 
     const onFilmCardClick = () => navigate(`/${id}`);
-
     return (
         <div className={className}>
             <div className="imgAndTitle" onClick={onFilmCardClick}>
@@ -39,14 +39,17 @@ const FilmCardContainer = ({ film, className }) => {
                 </p>
             </div>
 
-            {userId && (
-                <FavoritesButton
-                    movieId={id}
-                    isFavorite={isFavorite}
-                    onFavoriteButtonClick={onFavoriteButtonClick}
-                    isLoading={isFavoriteLoading}
-                />
-            )}
+            {userId &&
+                (isFavoritesIdsLoading ? (
+                    <FavoritesLoader />
+                ) : (
+                    <FavoritesButton
+                        movieId={id}
+                        isFavorite={isFavorite}
+                        onFavoriteButtonClick={onFavoriteButtonClick}
+                        isLoading={isFavoriteLoading}
+                    />
+                ))}
         </div>
     );
 };

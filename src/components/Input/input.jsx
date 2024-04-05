@@ -13,7 +13,6 @@ const InputContainer = forwardRef(
             onKeyUp,
             onFocus,
             onBlur,
-            onMouseEnter,
             ...props
         },
         ref
@@ -26,7 +25,6 @@ const InputContainer = forwardRef(
             onKeyUp={onKeyUp}
             onFocus={onFocus}
             onBlur={onBlur}
-            onMouseEnter={onMouseEnter}
             {...props}
             ref={ref}
         >

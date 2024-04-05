@@ -1,13 +1,12 @@
-import { auth } from "../../../../db/db";
 import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../../../redux/slices/user-slice";
 import { selectUserEmail, selectUserId } from "../../../../redux/selectors";
-import { signOut } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "../../../Icon/icon";
 import { useFavorites } from "../../../../hooks";
-import styled from "styled-components";
 import { extractUsernameFromEmail } from "../../../../features/extract-username-from-email";
+import { logout } from "../../../../db/actions/";
+import styled from "styled-components";
 
 const UserBarContainer = ({ className }) => {
     const dispatch = useDispatch();
@@ -22,7 +21,7 @@ const UserBarContainer = ({ className }) => {
     const onLoginIconClick = () => navigate("/authorize");
 
     const handleSignOut = () => {
-        signOut(auth).then(() => {
+        logout().then(() => {
             dispatch(removeUser());
             navigate("/");
         });

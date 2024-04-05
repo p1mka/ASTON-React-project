@@ -21,19 +21,11 @@ export const favoritesSlice = createSlice({
                 state.ids = action.payload;
                 state.isLoading = false;
             })
-            .addCase(addFavorite.pending, (state) => {
-                state.isLoading = true;
-            })
             .addCase(addFavorite.fulfilled, (state, action) => {
                 state.ids.push(action.payload);
-                state.isLoading = false;
-            })
-            .addCase(removeFavorite.pending, (state) => {
-                state.isLoading = true;
             })
             .addCase(removeFavorite.fulfilled, (state, action) => {
                 state.ids = state.ids.filter((id) => id !== action.payload);
-                state.isLoading = false;
             });
     },
 });
